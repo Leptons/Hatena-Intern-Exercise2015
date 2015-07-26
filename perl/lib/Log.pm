@@ -38,4 +38,16 @@ sub time {
     return $time;
 }
 
+sub to_hash {
+    my ($self) = @_;
+    my %res;
+    for (qw/status size user referer/){
+        $res{$_} = $self->{$_} if defined $self->{$_};
+    }
+    $res{time} = $self->time if defined $self->{epoch};
+    $res{uri} = $self->uri if defined $self->{host};
+    $res{method} = $self->method if defined $self->{req};
+    return \%res;
+}
+
 1;

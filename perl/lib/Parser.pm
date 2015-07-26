@@ -15,7 +15,7 @@ sub parse {
     my @res;
     while (<$fh>){
         chomp;
-        my @log = map { /(.*?):(.*)/s; $1 => $2; } grep !/:-/, split /\t/;
+        my @log = map { /\A([^:]*?):(.*)\z/s; $1 => $2; } grep !/\A[^:]*:-\z/, split /\t/;
         push @res, Log->new(@log);
     }
     return \@res;

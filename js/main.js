@@ -21,6 +21,8 @@ function parseLTSVLog(logStr) {
 				}
 			}
 		}
+		// path ‚Ü‚½‚Í epoch ‚ª‹ó‚Ìƒf[ƒ^‚Í–³‹‚·‚é
+		if(typeof record.path === "undefined" || typeof record.epoch === "undefined") continue;
 		logRecords.push(record);
 	}
 	return logRecords;

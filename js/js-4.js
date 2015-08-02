@@ -6,6 +6,7 @@
 		var log = parseLTSVLog(logInput.value);
 		var searchText = searchInput.value;
 		var logFiltered = log.filter(function(elem){
+			if(typeof elem.path === "undefined") return false;
 			return elem.path.indexOf(searchText)>=0;
 		});
 		createLogTable(tableContainer, logFiltered);

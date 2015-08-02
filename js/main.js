@@ -21,8 +21,6 @@ function parseLTSVLog(logStr) {
 				}
 			}
 		}
-		// path または epoch が空のデータは無視する
-		if(typeof record.path === "undefined" || typeof record.epoch === "undefined") continue;
 		logRecords.push(record);
 	}
 	return logRecords;
@@ -45,6 +43,8 @@ function createLogTable(elem, logRecords) {
 
 	var tbodyNode = document.createElement('tbody');
 	for(var i = 0; i < logRecords.length; i++){
+		// path または epoch が空のデータは無視する
+		if(typeof logRecords[i].path === "undefined" || typeof logRecords[i].epoch === "undefined") continue;
 		var text1 = document.createTextNode(logRecords[i].path);
 		var tdNode1 = document.createElement('td');
 		tdNode1.appendChild(text1);

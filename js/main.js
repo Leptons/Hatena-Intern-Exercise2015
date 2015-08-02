@@ -10,8 +10,14 @@ function parseLTSVLog(logStr) {
 			if(result !== null && result[2] !== "-"){
 				if(result[1] === "epoch"){
 					result[2] = parseInt(result[2], 10);
-				} 
+				}	
 				record[result[1]] = result[2];
+				if(result[1] === "req"){
+					var r = result[2].match(/^.+ (.*) .+$/);
+					if(r !== null){
+						record.path = r[1];
+					}
+				}
 			}
 		}
 		logRecords.push(record);

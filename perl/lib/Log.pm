@@ -9,30 +9,45 @@ sub new {
 
 sub protocol {
     my ($self) = @_;
+    if(!defined $self->{req}){
+        return undef;
+    }
     my $protocol = (split ' ', $self->{req})[2];
     return $protocol;
 }
 
 sub method {
     my ($self) = @_;
+    if(!defined $self->{req}){
+        return undef;
+    }
     my $method = (split ' ', $self->{req})[0];
     return $method;
 }
 
 sub path {
     my ($self) = @_;
+    if(!defined $self->{req}){
+        return undef;
+    }
     my $path = (split ' ', $self->{req})[1];
     return $path;
 }
 
 sub uri {
     my ($self) = @_;
+    if(!defined $self->{host} || !defined $self->path){
+        return undef;
+    }
     my $uri = 'http://' . $self->{host} . $self->path;
     return $uri;
 }
 
 sub time {
     my ($self) = @_;
+    if(!defined $self->{epoch}){
+        return undef;
+    }
     my ($sec, $min, $hour, $day, $month, $year) = gmtime $self->{epoch};
     my $time = sprintf "%04d-%02d-%02dT%02d:%02d:%02d", $year+1900, $month+1, $day, $hour, $min, $sec;
     return $time;

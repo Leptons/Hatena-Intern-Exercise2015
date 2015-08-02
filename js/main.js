@@ -12,6 +12,7 @@ function parseLTSVLog(logStr) {
 					result[2] = parseInt(result[2], 10);
 				}	
 				record[result[1]] = result[2];
+				// key ‚ª req ‚Ì‚Æ‚«‚ÍAvalue ‚Ì’†‚©‚ç path ‚ğæ‚èo‚·
 				if(result[1] === "req"){
 					var r = result[2].match(/^.+ (.*) .+$/);
 					if(r !== null){
